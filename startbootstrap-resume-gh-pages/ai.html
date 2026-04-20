@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Genre Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dfe7ff, #f7faff);
+            text-align: center;
+            padding: 40px;
+        }
+
+        #quiz-box {
+            background: white;
+            padding: 25px;
+            width: 380px;
+            margin: auto;
+            border-radius: 10px;
+            border: 2px solid #333;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+
+        button {
+            padding: 10px 14px;
+            margin: 8px;
+            cursor: pointer;
+            border-radius: 6px;
+            border: none;
+            background-color: #4a63ff;
+            color: white;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #2f45cc;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        #score, #highscore {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Music Genre Quiz</h1>
+
+    <div id="quiz-box">
+        <p id="question">Click "New Album" to start!</p>
+
+        <button onclick="newAlbum()">New Album</button>
+
+        <div>
+            <button onclick="guess('Shoegaze')">Shoegaze</button>
+            <button onclick="guess('Metal')">Metal</button>
+            <button onclick="guess('Singer-Songwriter')">Singer-Songwriter</button>
+            <button onclick="guess('Latin / MPB')">Latin / MPB</button>
+        </div>
+
+        <p id="result"></p>
+        <p id="score">Score: 0</p>
+        <p id="highscore">High Score: 0</p>
+    </div>
+
+    <script>
+        const albums = [
+            // SHOEGaze (your albums)
+            { name: "Blue Rev", artist: "Alvvays", genre: "Shoegaze" },
+            { name: "Loveless", artist: "My Bloody Valentine", genre: "Shoegaze" },
+            { name: "I Want to Be There", artist: "Sadness", genre: "Shoegaze" },
+            { name: "Heaven or Las Vegas", artist: "Cocteau Twins", genre: "Shoegaze" },
+            { name: "Sky Hundred", artist: "Parannoul", genre: "Shoegaze" },
+
+            // Extra Shoegaze
+            { name: "Souvlaki", artist: "Slowdive", genre: "Shoegaze" },
+            { name: "Nowhere", artist: "Ride", genre: "Shoegaze" },
+            { name: "Isn't Anything", artist: "My Bloody Valentine", genre: "Shoegaze" },
+            { name: "Just for a Day", artist: "Slowdive", genre: "Shoegaze" },
+            { name: "A Sunny Day in Glasgow", artist: "ASDIG", genre: "Shoegaze" },
+
+            // METAL (your albums)
+            { name: "Ashes Against the Grain", artist: "Agalloch", genre: "Metal" },
+            { name: "Epicus Doomicus Metallicus", artist: "Candlemass", genre: "Metal" },
+            { name: "Brave Murder Day", artist: "Katatonia", genre: "Metal" },
+            { name: "Will of the Gods is Great Power", artist: "Scald", genre: "Metal" },
+            { name: "Watching From a Distance", artist: "Warning", genre: "Metal" },
+
+            // Extra Metal
+            { name: "Master of Reality", artist: "Black Sabbath", genre: "Metal" },
+            { name: "Rust in Peace", artist: "Megadeth", genre: "Metal" },
+            { name: "Leviathan", artist: "Mastodon", genre: "Metal" },
+            { name: "Blackwater Park", artist: "Opeth", genre: "Metal" },
+            { name: "Reign in Blood", artist: "Slayer", genre: "Metal" },
+
+            // SINGER-SONGWRITER (your albums)
+            { name: "Chet Baker Sings", artist: "Chet Baker", genre: "Singer-Songwriter" },
+            { name: "Pink Moon", artist: "Nick Drake", genre: "Singer-Songwriter" },
+            { name: "Born to Run", artist: "Bruce Springsteen", genre: "Singer-Songwriter" },
+            { name: "This Empty Northern Hemisphere", artist: "Gregory Alan Isakov", genre: "Singer-Songwriter" },
+            { name: "The Stranger", artist: "Billy Joel", genre: "Singer-Songwriter" },
+
+            // Extra Singer-Songwriter
+            { name: "Carrie & Lowell", artist: "Sufjan Stevens", genre: "Singer-Songwriter" },
+            { name: "For Emma, Forever Ago", artist: "Bon Iver", genre: "Singer-Songwriter" },
+            { name: "Harvest", artist: "Neil Young", genre: "Singer-Songwriter" },
+            { name: "Blue", artist: "Joni Mitchell", genre: "Singer-Songwriter" },
+            { name: "Good Kid, M.A.A.D City", artist: "Kendrick Lamar", genre: "Singer-Songwriter" },
+
+            // LATIN / MPB (your albums)
+            { name: "Ventura", artist: "Los Hermanos", genre: "Latin / MPB" },
+            { name: "Clube da Esquina", artist: "Lô Borges & Milton Nascimento", genre: "Latin / MPB" },
+            { name: "Deseo, Carne, y Voluntad", artist: "Candelabro", genre: "Latin / MPB" },
+            { name: "La Vida Era Más Corto", artist: "Milo j", genre: "Latin / MPB" },
+            { name: "De Todas las Flores", artist: "Natalia Lafourcade", genre: "Latin / MPB" },
+
+            // Extra Latin / MPB
+            { name: "Construção", artist: "Chico Buarque", genre: "Latin / MPB" },
+            { name: "Tropicalia", artist: "Various Artists", genre: "Latin / MPB" },
+            { name: "Acabou Chorare", artist: "Novos Baianos", genre: "Latin / MPB" },
+            { name: "Caprichoso", artist: "Boi-Bumbá", genre: "Latin / MPB" },
+            { name: "Sobrevivendo no Inferno", artist: "Racionais MC's", genre: "Latin / MPB" }
+        ];
+
+        let currentAlbum = null;
+        let score = 0;
+        let highscore = localStorage.getItem("highscore") || 0;
+        document.getElementById("highscore").textContent = "High Score: " + highscore;
+
+        function newAlbum() {
+            currentAlbum = albums[Math.floor(Math.random() * albums.length)];
+            document.getElementById("question").textContent =
+                "What genre is: " + currentAlbum.name + "?";
+            document.getElementById("result").textContent = "";
+        }
+
+        function guess(genre) {
+            if (!currentAlbum) return;
+
+            const result = document.getElementById("result");
+
+            if (genre === currentAlbum.genre) {
+                result.textContent = "Correct! Artist: " + currentAlbum.artist;
+                result.style.color = "green";
+                score++;
+            } else {
+                result.textContent = "Incorrect — it's " + currentAlbum.genre +
+                                     ". Artist: " + currentAlbum.artist;
+                result.style.color = "red";
+            }
+
+            document.getElementById("score").textContent = "Score: " + score;
+
+            if (score > highscore) {
+                highscore = score;
+                localStorage.setItem("highscore", highscore);
+                document.getElementById("highscore").textContent = "High Score: " + highscore;
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Albums Page</title>
+    <link rel="stylesheet" href="css/blank.css">
+</head>
+
+<body id="top">
+
+    <div id="nav">
+        <a href="#shoegaze">Shoegaze</a> |
+        <a href="#metal">Metal</a> |
+        <a href="#singers">Singer-Songwriter</a> |
+        <a href="#latin">Latin / MPB</a> |
+        <a href="#video">YouTube Video</a> |
+        <a href="#tableau">Tableau Graph</a> |
+        <a href="ai.html">AI Game</a> |
+    </div>
+
+    <div id="content">
+
+        <h1>Albums I Like</h1>
+
+        <ol>
+
+            <!-- SHOEGaze -->
+            <li id="shoegaze">Shoegaze / Dreampop
+                <ul>
+                    <li>Blue Rev - Alvvays</li>
+                    <li>Loveless - My Bloody Valentine</li>
+                    <li>I Want to Be There - Sadness</li>
+                    <li>Heaven or Las Vegas - Cocteau Twins</li>
+                    <li>Sky Hundred - Parannoul</li>
+                </ul>
+
+                <img src="assets/img/Blue Rev.png"
+                     alt="Blue Rev Album Cover" width="200">
+            </li>
+
+            <!-- METAL -->
+            <li id="metal">Metal
+                <ul>
+                    <li>Ashes Against the Grain - Agalloch</li>
+                    <li>Epicus Doomicus Metallicus - Candlemass</li>
+                    <li>Brave Murder Day - Katatonia</li>
+                    <li>Will of the Gods is Great Power - Scald</li>
+                    <li>Watching From a Distance - Warning</li>
+                </ul>
+
+                <img src="assets/img/Agalloch.png"
+                     alt="Agalloch Album Cover" width="200">
+            </li>
+
+            <!-- SINGER-SONGWRITER -->
+            <li id="singers">Singer-Songwriter
+                <ul>
+                    <li>Chet Baker Sings - Chet Baker</li>
+                    <li>Pink Moon - Nick Drake</li>
+                    <li>Born to Run - Bruce Springsteen</li>
+                    <li>This Empty Northern Hemisphere - Gregory Alan Isakov</li>
+                    <li>The Stranger - Billy Joel</li>
+                </ul>
+            </li>
+
+            <!-- LATIN / MPB -->
+            <li id="latin">Latin / MPB
+                <ul>
+                    <li>Ventura - Los Hermanos</li>
+                    <li>Clube da Esquina - Lô Borges & Milton Nascimento</li>
+                    <li>Deseo, Carne, y Voluntad - Candelabro</li>
+                    <li>La Vida Era Más Corto - Milo j</li>
+                    <li>De Todas las Flores - Natalia Lafourcade</li>
+                </ul>
+            </li>
+
+        </ol>
+
+        <!-- YOUTUBE -->
+        <div id="video">
+            <iframe width="560" height="315"
+                src="https://www.youtube.com/watch?v=IxuThNgl3YA"
+                title="YouTube video" frameborder="0"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- TABLEAU -->
+        <div class='tableauPlaceholder' id='viz1776704189994' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Metal domination'
+                        src='https://public.tableau.com/static/images/th/theEvolutionofMetal/Dashboard1/1_rss.png'
+                        style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='theEvolutionofMetal/Dashboard1' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='no' />
+                <param name='static_image'
+                    value='https://public.tableau.com/static/images/th/theEvolutionofMetal/Dashboard1/1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+            </object>
+        </div>
+
+        <script type='text/javascript'>
+            var divElement = document.getElementById('viz1776704189994');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width = '900px';
+            vizElement.style.height = '1300px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+
+    </div>
+
+    <div id="footer">
+        <p>Back to <a href="index.html">Professional Page</a></p>
+        <a href="#top">Back to Top</a>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+body {
+    background-color: #3c496f;
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+#nav {
+    background-color: #dce3ff;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#content {
+    padding: 20px;
+}
+
+#footer {
+    margin-top: 40px;
+    padding: 10px;
+    background-color: #dce3ff;
+    text-align: center;
+}
+
+img {
+    margin-top: 10px;
+    border: 2px solid #333;
+}
